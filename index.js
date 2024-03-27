@@ -68,10 +68,16 @@ const questions = [
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, generateMarkdown(data))
+    fs.writeFile(fileName, generateMarkdown(data), function (err) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("Successfully created the README.md file!");
+    });
 }
 
-// TODO: Create a function to initialize app
+
+// function to initalize the beginning of the questions
 function init() {
     inquirer.prompt(questions).then((data) => {
         console.log(JSON.stringify(data, null, " "));
@@ -79,5 +85,5 @@ function init() {
     });
 }
 
-// Function call to initialize app
+// call the function to initalize the beginning of the questions
 init();
